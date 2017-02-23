@@ -1,3 +1,1 @@
-# Akka
-
-Learning Akka Study
+# akkademy-db
