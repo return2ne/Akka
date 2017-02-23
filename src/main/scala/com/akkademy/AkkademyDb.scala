@@ -1,24 +1,30 @@
 package com.akkademy
 
-import akka.actor.Actor
+import akka.actor.{Actor, Status}
 import akka.event.Logging
-import com.akkademy.messages.SetRequest
+import com.akkademy.messages._
 
 import scala.collection.mutable
 
-/**
-  * Created by liebeu96 on 2017. 2. 21..
-  */
 class AkkademyDb extends Actor {
 
   val map = new mutable.HashMap[String, Object]
   val log = Logging(context.system, this)
 
-  override def receive: Receive = {
+  override def receive = {
     case SetRequest(key, value) => {
       log.info("received SetRequest - key: {} value: {}", key, value)
       map.put(key, value)
+      sender() ! Status.Success
     }
-    case o => log.info("received unknown message {}", o)
+    case GetRequest(key) => {
+      log.info("received GetRequest - key: {}", key)
+      val response: Option[Object] = map.get(key)
+      response match {
+        case Some(x) => sender() ! x
+        case None => sender() ! Status.Failure(new KeyNotFoundException(key))
+      }
+    }
+    case o => Status.Failure(new ClassNotFoundException())
   }
 }

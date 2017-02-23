@@ -1,8 +1,8 @@
 package com.akkademy
 
-/**
-  * Created by liebeu96 on 2017. 2. 23..
-  */
-object Main {
+import akka.actor.{ActorSystem, Props}
 
+object Main extends App {
+  val system = ActorSystem("akkademy")
+  system.actorOf(Props[AkkademyDb], name = "akkademy-db")
 }

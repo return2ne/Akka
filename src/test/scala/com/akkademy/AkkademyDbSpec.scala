@@ -2,7 +2,7 @@ package com.akkademy
 
 import akka.actor.ActorSystem
 import org.scalatest.{BeforeAndAfterEach, FunSpecLike, Matchers}
-import com.akkademy.messages.SetRequest
+import com.akkademy.messages._
 import akka.testkit.TestActorRef
 
 /**
