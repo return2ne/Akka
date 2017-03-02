@@ -4,5 +4,5 @@ import akka.actor.{ActorSystem, Props}
 
 object Main extends App {
   val system = ActorSystem("akkademy")
-  system.actorOf(Props[AkkademyDb], name = "akkademy-db")
+  val helloActor = system.actorOf(Props[AkkademyDb], name = "akkademy-db")
 }

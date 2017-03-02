@@ -1,15 +1,15 @@
 package com.akkademy
 
 import akka.actor.ActorSystem
-import org.scalatest.{BeforeAndAfterEach, FunSpecLike, Matchers}
+import org.scalatest.{FunSpecLike, Matchers}
 import com.akkademy.messages._
 import akka.testkit.TestActorRef
+import akka.util.Timeout
+import scala.concurrent.duration._
 
-/**
-  * Created by liebeu96 on 2017. 2. 21..
-  */
-class AkkademyDbSpec extends FunSpecLike with Matchers with BeforeAndAfterEach {
+class AkkademyDbSpec extends FunSpecLike with Matchers {
   implicit val system = ActorSystem()
+  implicit val timeout = Timeout(5 seconds)
   describe("akkademyDb") {
     describe("given SetRequest") {
       it("should place key/value into map") {
